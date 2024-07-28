@@ -60,14 +60,14 @@
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
         if(prediction[0].probability.toFixed(2) > 0.9){
-            // var audio1 = new Audio('v0.mp3');
-            // audio1.play();
             labelContainer.childNodes[0].innerHTML = "포크가 화면에 나타났습니다.";
+            var audio = new Audio('sounds/fork.mp3');
+            audio.play();
         }
         else if(prediction[1].probability.toFixed(2) > 0.9){
-            // var audio2 = new Audio('v1.mp3');
-            // audio2.play();
             labelContainer.childNodes[0].innerHTML = "나이프가 화면에 나타났습니다.";
+            var audio = new Audio('sounds/knife.mp3');
+            audio.play();
         } else{
             labelContainer.childNodes[0].innerHTML = "포크나 나이프가 화면에 나타나지 않았습니다.";
         }
