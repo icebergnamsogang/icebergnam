@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ilwon's 0.97</title>
+    <title>ilwon's 0.98</title>
 </head>
 <body>
 
@@ -66,18 +66,10 @@
         const prediction = await model.predict(webcam.canvas);
         if(prediction[0].probability.toFixed(2) > 0.9){
             labelContainer.childNodes[0].innerHTML = "포크가 화면에 나타났습니다.";
-            if (!forkAudio.paused) {
-                forkAudio.pause();
-                forkAudio.currentTime = 0;
-            }
             forkAudio.play();
         }
         else if(prediction[1].probability.toFixed(2) > 0.9){
             labelContainer.childNodes[0].innerHTML = "나이프가 화면에 나타났습니다.";
-            if (!knifeAudio.paused) {
-                knifeAudio.pause();
-                knifeAudio.currentTime = 0;
-            }
             knifeAudio.play();
         } else{
             labelContainer.childNodes[0].innerHTML = "포크나 나이프가 화면에 나타나지 않았습니다.";
