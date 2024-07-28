@@ -21,6 +21,8 @@
     const URL = "./my_model/";
 
     let model, webcam, labelContainer, maxPredictions;
+    let forkAudio = new Audio('sounds/fork.mp3');
+    let knifeAudio = new Audio('sounds/knife.mp3');
 
     // Load the image model and setup the webcam
     async function init() {
@@ -49,7 +51,7 @@
         }
 
         // 1초의 인터벌을 줘서 하울링 현상을 예방
-        setInterval(loop,10000);
+        // setInterval(loop,1000);
     }
 
     async function loop() {
@@ -64,13 +66,19 @@
         const prediction = await model.predict(webcam.canvas);
         if(prediction[0].probability.toFixed(2) > 0.9){
             labelContainer.childNodes[0].innerHTML = "포크가 화면에 나타났습니다.";
-            var audio = new Audio('sounds/fork.mp3');
-            audio.play();
+            if (!forkAudio.paused) {
+                forkAudio.pause();
+                forkAudio.currentTime = 0;
+            }
+            forkAudio.play();
         }
         else if(prediction[1].probability.toFixed(2) > 0.9){
             labelContainer.childNodes[0].innerHTML = "나이프가 화면에 나타났습니다.";
-            var audio = new Audio('sounds/knife.mp3');
-            audio.play();
+            if (!knifeAudio.paused) {
+                knifeAudio.pause();
+                knifeAudio.currentTime = 0;
+            }
+            knifeAudio.play();
         } else{
             labelContainer.childNodes[0].innerHTML = "포크나 나이프가 화면에 나타나지 않았습니다.";
         }
