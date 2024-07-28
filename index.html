@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ilwon's 0.93</title>
+    <title>ilwon's 0.94</title>
 </head>
 <body>
 
@@ -47,6 +47,9 @@
         for (let i = 0; i < maxPredictions; i++) { // and class labels
             labelContainer.appendChild(document.createElement("div"));
         }
+
+        // 1초의 인터벌을 줘서 하울링 현상을 예방
+        setInterval(loop,1000);
     }
 
     async function loop() {
